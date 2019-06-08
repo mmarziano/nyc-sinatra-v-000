@@ -15,6 +15,6 @@ class FiguresController < ApplicationController
   post '/figures/new' do
     binding.pry
 
-      erb :"figures/new"
+    redirect to :"figures/show"
   end
 end
