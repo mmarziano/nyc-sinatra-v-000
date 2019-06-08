@@ -1,0 +1,20 @@
+<h2>Create New Figure</h2>
+
+<!-- add content here -->
+  <form action="/figures/new" action="POST">
+    <label for="Figure Name">Name:</label>
+    <input type="text" name="figure[name]" id="Figure Name"></br>
+    <label for="Figure Title">Titles:</label></br>
+      <%@titles.each do |title| %>
+        <p><input type="checkbox" name="figure[title]" value=<%=title.name%>><%= title.name%></p>
+      <%end%>
+    <label for="Create Figure Name">Create New Title:</label>
+    <input type="text" name="figure[create_title]" id="Create Figure Title"></br>
+    <label for="Figure Landmark">Landmarks:</label></br>
+    <input type="text" name="figure[title]" id="Figure Title"></br>
+
+  </form>
+
+
+<a class="button" href="/figures">Figures</a>
+<a class="button" href="/">Home</a>
