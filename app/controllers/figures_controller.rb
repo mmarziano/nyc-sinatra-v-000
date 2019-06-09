@@ -48,7 +48,16 @@ class FiguresController < ApplicationController
     @figure = Figure.find(params[:id])
     @landmarks = @figure.landmarks
     @titles = @figure.titles
-    binding.pry
+
     erb :"figures/show"
+  end
+
+  get '/figures/:id/edit' do
+
+    @figure = Figure.find(params[:id])
+    @landmarks = @figure.landmarks
+    @titles = @figure.titles
+    #binding.pry
+    erb :"figures/edit"
   end
 end
