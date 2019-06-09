@@ -36,14 +36,19 @@ class FiguresController < ApplicationController
           @new_landmark.save
           @figure.landmarks << @new_landmark
         end
+    @figure.title_ids = @new_title.id
+    @figure.landmark_ids = @new_landmark.id
+    @figure.landmark.name = @new_landmark.name
     @figure.save
-
+    #binding.pry
     redirect to :"figures/#{@figure.id}"
   end
 
-  get 'figures/:id' do
-    
+  get '/figures/:id' do
     @figure = Figure.find(params[:id])
+    @landmarks = @figure.landmarks
+    @titles = @figure.titles
+    binding.pry
     erb :"figures/show"
   end
 end
