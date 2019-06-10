@@ -50,13 +50,13 @@ class LandmarksController < ApplicationController
 
   get '/landmarks/:id/edit' do
     @landmark = Landmark.find(params[:id])
-    
-    erb :'figures/edit'
+
+    erb :'landmarks/edit'
   end
 
   patch '/landmarks/:id' do
     binding.pry
 
-    redirect to :"figures/#{@figure.id}"
+    redirect to :"landmarks/#{@landmark.id}"
   end
 end
