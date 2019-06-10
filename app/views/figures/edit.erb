@@ -3,7 +3,7 @@
 
 <!-- add content here -->
   <form action="/figures/<%=@figure.id%>" method="POST">
-  <input type="hidden" action="_method" method="PATCH">
+  <input type="hidden" name="_method" value="PATCH">
     <label for="Figure Name">Name:</label>
     <input type="text" name="figure[name]" id="figure_name" value=<%=@figure.name%>></br>
     <h2><label for="Figure Title">Titles:</label></h2>
