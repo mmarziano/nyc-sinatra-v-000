@@ -5,7 +5,7 @@
   <form action="/figures/<%=@figure.id%>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
     <label for="Figure Name">Name:</label>
-    <input type="text" name="figure[name]" id="figure_name" value=<%=@figure.name%>></br>
+    <input type="text" name="figure[name]" id="figure_name" value="<%=@figure.name%>"></br>
     <h2><label for="Figure Title">Titles:</label></h2>
       <%Title.all.each do |title| %>
         <%if !@titles.include?(title)%>

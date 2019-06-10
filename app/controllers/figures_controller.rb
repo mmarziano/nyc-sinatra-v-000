@@ -60,13 +60,9 @@ class FiguresController < ApplicationController
   end
 
   patch '/figures/:id' do
-    #binding.pry
     @figure = Figure.find(19)
-    if @figure.name == params[:figure][:name]
-      @figure.name
-    else
-      @figure.update("name" => params[:figure][:name])
-    end
+    binding.pry
+    @figure.update("name" => params[:figure][:name])
     @figure.titles.destroy
       if params.has_key?(:title_ids)
         @title = Title.find(params[:figure][:title_ids])
