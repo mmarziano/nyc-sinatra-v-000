@@ -26,8 +26,8 @@ class LandmarksController < ApplicationController
         end
       if params.has_key?(:landmark_ids)
         @landmark = Landmark.find(params[:landmark_ids])
-            if Landmark.all.find(params[:landmark_ids]) && !@figure.landmarks.include?(@landmark)
-              @figure.landmarks << @landmark
+            if !@figure.landmarks.include?(@landmark)
+              Landmark.all << @landmark
             end
       end
         if params[:landmark][:name] != nil
@@ -55,7 +55,7 @@ class LandmarksController < ApplicationController
   end
 
   patch '/landmarks/:id' do
-    
+
     @landmark = Landmark.find(params[:id])
     @landmark.update("name" => params[:landmark][:name], "year_completed" => params[:landmark][:year_completed])
     redirect to :"landmarks/#{@landmark.id}"

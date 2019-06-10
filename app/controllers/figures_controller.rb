@@ -9,6 +9,7 @@ class FiguresController < ApplicationController
   get '/figures/new' do
       @titles = Title.all
       @landmarks = Landmark.all
+
       erb :"figures/new"
   end
 
@@ -26,19 +27,16 @@ class FiguresController < ApplicationController
           @figure.titles << @new_title
         end
       if params.has_key?(:landmark_ids)
-        @landmark = Landmark.find(params[:landmark_ids])
-            if Landmark.all.find(params[:landmark_ids]) && !@figure.landmarks.include?(@landmark)
+        @landmark = Landmark.find(params[:figure][:landmark_ids])
+            if !@figure.landmarks.include?(@landmark)
               @figure.landmarks << @landmark
             end
       end
-        if params[:landmark][:name] != nil
-          @new_landmark = Landmark.create(name: params[:landmark][:name])
+        if params[:landmark][:name] != ""
+          @new_landmark = Landmark.create("name" => params[:landmark][:name], "year_completed" => params[:landmark][:year_completed])
           @new_landmark.save
           @figure.landmarks << @new_landmark
         end
-    @figure.title_ids = @new_title.id
-    @figure.landmark_ids = @new_landmark.id
-    @figure.landmark.first.name = @new_landmark.name
     @figure.save
     #binding.pry
     redirect to :"figures/#{@figure.id}"
@@ -60,36 +58,33 @@ class FiguresController < ApplicationController
   end
 
   patch '/figures/:id' do
-    @figure = Figure.find(19)
-    binding.pry
+    @figure = Figure.find(params[:id])
+    
     @figure.update("name" => params[:figure][:name])
-    @figure.titles.destroy
-      if params.has_key?(:title_ids)
+    @figure.titles.clear
+      if params[:figure][:title_ids] != ""
         @title = Title.find(params[:figure][:title_ids])
           if Title.all.find(params[:figure][:title_ids]) && !@figure.titles.include?(@title)
             @figure.titles << Title.find(params[:figure][:title_ids])
           end
       end
-        if params[:title][:name] != nil
+        if params[:title][:name] != ""
           @new_title = Title.create(name: params[:title][:name])
           @new_title.save
           @figure.titles << @new_title
         end
-      @figure.landmarks.destroy
-      if params.has_key?(:landmark_ids)
-        @landmark = Landmark.find(params[:landmark_ids])
-            if Landmark.all.find(params[:landmark_ids]) && !@figure.landmarks.include?(@landmark)
+      @figure.landmarks.clear
+      if params[:figure][:landmark_ids] != ""
+        @landmark = Landmark.find(params[:figure][:landmark_ids])
+            if !@figure.landmarks.include?(@landmark)
               @figure.landmarks << @landmark
             end
       end
-        if params[:landmark][:name] != nil
-          @new_landmark = Landmark.create(name: params[:landmark][:name])
+        if params[:landmark][:name] != ""
+          @new_landmark = Landmark.create(name: params[:landmark][:name], year_completed: params[:landmark][:year_completed])
           @new_landmark.save
           @figure.landmarks << @new_landmark
         end
-    @figure.title_ids = @new_title.id
-    @figure.landmark_ids = @new_landmark.id
-    @figure.landmarks.first.name = @new_landmark.name
     @figure.save
     #binding.pry
     redirect to :"figures/#{@figure.id}"

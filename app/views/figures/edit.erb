@@ -6,7 +6,6 @@
   <input type="hidden" name="_method" value="PATCH">
     <label for="Figure Name">Name:</label>
     <input type="text" name="figure[name]" id="figure_name" value="<%=@figure.name%>"></br>
-    <%binding.pry%>
     <h2><label for="Figure Title">Titles:</label></h2>
       <%Title.all.each do |title| %>
         <%if !@titles.include?(title)%>
@@ -26,7 +25,9 @@
       <%end%>
     <%end%>
     <label for="Create Landmark">Create New Landmark:</label>
-    <input type="text" name="landmark[name]" id="new_landmark"></br>
+    <input type="text" name="landmark[name]" id="new_landmark">
+    <label for="Year Completed">Year Completed:</label>
+    <input type="text" name="landmark[year_completed]" id="year_completed"></br>
     <input type="submit" value="Edit Figure"></br>
   </form>
 <a class="button" href="/figures">Figures</a>

@@ -16,7 +16,9 @@
         <p><input type="checkbox" name="figure[landmark_ids][]"  id="landmark_<%=landmark.id%>" value=<%=landmark.id%>> <%= landmark.name%> </p>
       <%end%>
     <label for="Create Landmark">Create New Landmark:</label>
-    <input type="text" name="landmark[name]" id="new_landmark"></br>
+    <input type="text" name="landmark[name]" id="new_landmark">
+    <label for="Year Completed">Year Completed:</label>
+    <input type="text" name="landmark[year_completed]" id="year_completed"></br>
     <input type="submit" value="Create New Figure"></br>
   </form>
 <a class="button" href="/figures">Figures</a>
