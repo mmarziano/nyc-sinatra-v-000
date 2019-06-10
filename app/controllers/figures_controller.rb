@@ -59,7 +59,7 @@ class FiguresController < ApplicationController
     erb :'figures/edit'
   end
 
-  post '/figures/:id/edit' do
+  post '/figures/:id' do
     #binding.pry
     @figure = Figure.find(19)
     if @figure.name == params[:figure][:name]
