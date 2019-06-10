@@ -11,7 +11,8 @@ class LandmarksController < ApplicationController
   end
 
   post '/landmarks' do
-    @figure = Figure.create(name: params[:figure][:name])
+    #binding.pry
+    @landmark = Landmark.create(name: params[:landmark][:name])
       if params.has_key?(:title_ids)
         @title = Title.find(params[:figure][:title_ids])
           if Title.all.find(params[:figure][:title_ids]) && !@figure.titles.include?(@title)
@@ -36,6 +37,26 @@ class LandmarksController < ApplicationController
         end
     @figure.save
 
-    redirect to :"figures/show"
+    redirect to :"landmarks/show"
+  end
+
+  get '/landmarks/:id' do
+    @landmark = Landmark.find(params[:id])
+    @figures = @landmark.figure
+
+
+    erb :"landmarks/show"
+  end
+
+  get '/landmarks/:id/edit' do
+    @landmark = Landmark.find(params[:id])
+    
+    erb :'figures/edit'
+  end
+
+  patch '/landmarks/:id' do
+    binding.pry
+
+    redirect to :"figures/#{@figure.id}"
   end
 end
