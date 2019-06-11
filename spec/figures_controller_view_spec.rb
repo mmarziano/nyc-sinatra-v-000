@@ -45,7 +45,6 @@ describe FiguresController do
     figure = Figure.last
     expect(Figure.all.count).to eq(3)
     expect(figure.name).to eq("Doctor Who")
-    binding.pry
     expect(figure.landmarks).to include(Landmark.first)
   end
 

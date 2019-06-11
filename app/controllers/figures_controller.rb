@@ -16,9 +16,10 @@ class FiguresController < ApplicationController
   post '/figures' do
     @figure = Figure.create(name: params[:figure][:name])
       if params.has_key?(:title_ids)
+        @figure.titles.clear
         @title = Title.find(params[:figure][:title_ids])
-          if Title.all.find(params[:figure][:title_ids]) && !@figure.titles.include?(@title)
-            @figure.titles << Title.find(params[:figure][:title_ids])
+          if !@figure.titles.include?(@title)
+            @figure.titles = @title
           end
       end
         if params[:title][:name] != nil
@@ -37,8 +38,9 @@ class FiguresController < ApplicationController
           @new_landmark.save
           @figure.landmarks << @new_landmark
         end
-    @figure.save
-    #binding.pry
+      @figure.save
+
+
     redirect to :"figures/#{@figure.id}"
   end
 
@@ -59,7 +61,7 @@ class FiguresController < ApplicationController
 
   patch '/figures/:id' do
     @figure = Figure.find(params[:id])
-    
+
     @figure.update("name" => params[:figure][:name])
     @figure.titles.clear
       if params[:figure][:title_ids] != ""
