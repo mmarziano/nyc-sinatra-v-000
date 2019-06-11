@@ -14,6 +14,7 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
+    binding.pry
     @figure = Figure.create(name: params[:figure][:name])
       if params.has_key?(:title_ids)
         @figure.titles.clear
