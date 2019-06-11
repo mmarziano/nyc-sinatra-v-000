@@ -16,7 +16,8 @@ class FiguresController < ApplicationController
   post '/figures' do
     binding.pry
     @figure = Figure.create(name: params[:figure])
-      if params[:landmark]
+      if params[:landmark][:name]
+        @figure.landmarks << Landmark.create(params[:landmark])
       #if params.has_key?(:title_ids)
         #@figure.titles.clear
         #@title = Title.find(params[:figure][:title_ids])
