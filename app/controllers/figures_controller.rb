@@ -14,7 +14,7 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
-    binding.pry
+    #binding.pry
     @figure = Figure.create(name: params[:figure])
       if params[:landmark][:name]
         @figure.landmarks << Landmark.create(params[:landmark])
