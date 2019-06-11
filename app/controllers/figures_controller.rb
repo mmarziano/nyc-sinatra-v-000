@@ -14,34 +14,18 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
-    @figure = Figure.create(name: params[:figure][:name])
-      if params.has_key?(:title_ids)
-        @figure.titles.clear
-        @title = Title.find(params[:figure][:title_ids])
-          if !@figure.titles.include?(@title)
-            @figure.titles = @title
-          end
+    #binding.pry
+    @figure = Figure.create(params[:figure])
+      if params[:landmark][:name]
+        @figure.landmarks << Landmark.create(params[:landmark])
       end
-        if params[:title][:name] != nil
-          @new_title = Title.create(name: params[:title][:name])
-          @new_title.save
-          @figure.titles << @new_title
-        end
-      if params.has_key?(:landmark_ids)
-        @landmark = Landmark.find(params[:figure][:landmark_ids])
-            if !@figure.landmarks.include?(@landmark)
-              @figure.landmarks << @landmark
-            end
+      if params[:title][:name]
+        @figure.titles << Title.create(params[:title])
       end
-        if params[:landmark][:name] != ""
-          @new_landmark = Landmark.create("name" => params[:landmark][:name], "year_completed" => params[:landmark][:year_completed])
-          @new_landmark.save
-          @figure.landmarks << @new_landmark
-        end
+      
       @figure.save
 
-
-    redirect to :"figures/#{@figure.id}"
+    redirect to "/figures/#{@figure.id}"
   end
 
   get '/figures/:id' do
