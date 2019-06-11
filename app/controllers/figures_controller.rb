@@ -19,6 +19,9 @@ class FiguresController < ApplicationController
       if params[:landmark][:name]
         @figure.landmarks << Landmark.create(params[:landmark])
       end
+      if params[:title][:name]
+        @figure.titles << Title.create(params[:title])
+      end
       #if params.has_key?(:title_ids)
         #@figure.titles.clear
         #@title = Title.find(params[:figure][:title_ids])
